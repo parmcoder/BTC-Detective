@@ -60,7 +60,7 @@ export default {
             }
           });
           // console.log(transferTotal);
-          // console.log(queue.length);
+          console.log(queue.length, "left to check");
           visited.add(queue[0]);
           queue.shift();
           // console.log(transactions);
@@ -68,12 +68,18 @@ export default {
           this.answer = Array.from(transactions);
         }
       }
-      let balances = Array.from(visited).map(a => {
+      let pos = Array.from(visited);
+
+      let balances = pos.map(a => {
         return { address: a, balance: 0 };
       });
-      // transactions.forEach(item => {
-      //   balances[indexOf]
-      // });
+      transactions.forEach(item => {
+        balances[pos.indexOf(item.to)].balance += item.value;
+        balances[pos.indexOf(item.from)].balance -= item.value;
+        if (balances[pos.indexOf(item.from)] <= 0) {
+          balances[pos.indexOf(item.from)].balance = 0;
+        }
+      });
       console.log("DONE!");
       this.done = "done!";
       this.balances = balances;
