@@ -68,12 +68,18 @@ export default {
           this.answer = Array.from(transactions);
         }
       }
-      let balances = Array.from(visited).map(a => {
+      let pos = Array.from(visited);
+
+      let balances = pos.map(a => {
         return { address: a, balance: 0 };
       });
-      // transactions.forEach(item => {
-      //   balances[indexOf]
-      // });
+      transactions.forEach(item => {
+        balances[pos.indexOf(item.to)] += item.value;
+        balances[pos.indexOf(item.to)] -= item.value;
+        if (balances[pos.indexOf(item.to)] <= 0) {
+          balances[pos.indexOf(item.to)] = item.value;
+        }
+      });
       console.log("DONE!");
       this.done = "done!";
       this.balances = balances;
