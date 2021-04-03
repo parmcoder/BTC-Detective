@@ -74,10 +74,10 @@ export default {
         return { address: a, balance: 0 };
       });
       transactions.forEach(item => {
-        balances[pos.indexOf(item.to)] += item.value;
-        balances[pos.indexOf(item.from)] -= item.value;
+        balances[pos.indexOf(item.to)].balance += item.value;
+        balances[pos.indexOf(item.from)].balance -= item.value;
         if (balances[pos.indexOf(item.from)] <= 0) {
-          balances[pos.indexOf(item.from)] = item.value;
+          balances[pos.indexOf(item.from)].balance = 0;
         }
       });
       console.log("DONE!");
