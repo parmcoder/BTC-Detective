@@ -76,7 +76,7 @@ export default {
       transactions.forEach(item => {
         balances[pos.indexOf(item.to)].balance += item.amount;
         balances[pos.indexOf(item.from)].balance -= item.amount;
-        if (balances[pos.indexOf(item.from)] <= 0) {
+        if (balances[pos.indexOf(item.from)].balance <= 0) {
           balances[pos.indexOf(item.from)].balance = 0;
         }
       });
