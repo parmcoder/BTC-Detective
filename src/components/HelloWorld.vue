@@ -60,7 +60,7 @@ export default {
             }
           });
           // console.log(transferTotal);
-          // console.log(queue.length);
+          console.log(queue.length, "left to check");
           visited.add(queue[0]);
           queue.shift();
           // console.log(transactions);
@@ -75,9 +75,9 @@ export default {
       });
       transactions.forEach(item => {
         balances[pos.indexOf(item.to)] += item.value;
-        balances[pos.indexOf(item.to)] -= item.value;
-        if (balances[pos.indexOf(item.to)] <= 0) {
-          balances[pos.indexOf(item.to)] = item.value;
+        balances[pos.indexOf(item.from)] -= item.value;
+        if (balances[pos.indexOf(item.from)] <= 0) {
+          balances[pos.indexOf(item.from)] = item.value;
         }
       });
       console.log("DONE!");
